@@ -1,4 +1,4 @@
-export class Environment {
+export default class Environment {
     constructor() {
         this.tld = window.location.host.substr(window.location.host.lastIndexOf(
             '.'), window.location.host.length);
@@ -11,4 +11,3 @@ export class Environment {
         return domain.substr(0, domain.lastIndexOf('.'));
     }
 }
-module.exports = Environment;

@@ -1,17 +1,17 @@
-var $ = require('jquery');
 import APIBuilder from './stv-api-builder';
 
+var $ = require('jquery');
 var apiUrl = new APIBuilder();
 
-export class APIRequest {
+export default class APIRequest {
     constructor(options, api) {
         // throw an error if no argument provided
         if (options.type === undefined) {
-            throw "An API Request requires a type. Exiting.";
+            throw new Error("An API Request requires a type. Exiting.");
         }
         // throw an error if no argument provided
         if (api === 'undefined') {
-            throw 'Please specify an API to use, either "stv" or "player"';
+            throw new Error('Please specify an API to use, either "stv" or "player"');
         }
         // set a context of the API, stv, player etc
         this.apiFamily = api;
@@ -54,5 +54,3 @@ export class APIRequest {
 
     }
 }
-
-module.exports = APIRequest;

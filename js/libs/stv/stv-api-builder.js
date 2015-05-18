@@ -2,7 +2,7 @@ import Environment from './stv-environment';
 
 var currentEnvironment = new Environment();
 
-export class APIBuilder {
+export default class APIBuilder {
 	constructor() {
 		// Assume app is in a hosted STV Environment
 		this.offline = false;
@@ -28,5 +28,3 @@ export class APIBuilder {
 		return this._playerApiUrl + '/' + this.version + '/';
 	}
 }
-
-module.exports = APIBuilder;
