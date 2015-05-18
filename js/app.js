@@ -1,7 +1,9 @@
 // App.js
-var categories = require('./modules/player-categories');
+import Categories from './modules/player-categories';
 
-categories.makeApiRequest().done(function(response) {
+var catRequest = new Categories();
+
+catRequest.getAll.makeApiRequest().done(function(response) {
 	console.log(response);
 }).fail(function(xhr) {
 	throw new Error('API responded with status text: ' + xhr.statusText);
