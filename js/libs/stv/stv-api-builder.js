@@ -11,12 +11,12 @@ export class APIBuilder {
 		this._playerApiUrl = 'http://player.api.' + currentEnvironment.currentDomain() +
 			currentEnvironment.tld;
 		// If the App is not in a hosted Env
-		if (window.location.host === 'localhost') {
+		if (window.location.host === 'localhost' || window.location.host === "") {
 			this.offline = true;
 			// This is the fallback main STV api url
-			this._apiUrl = 'http://api.stv.jmor';
+			this._apiUrl = 'http://api.stv.tv';
 			// This is the fallback Player STV api url
-			this._playerApiUrl = 'http://player.api.stv.jmor';
+			this._playerApiUrl = 'http://player.api.stv.tv';
 		};
 		// the API version
 		this.version = 'v1';
