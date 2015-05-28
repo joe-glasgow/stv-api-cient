@@ -9,7 +9,11 @@ var allCategoriesRequest = new APIRequest({
 }, 'player');
 
 export default class Categories {
-	constructor () {
-		this.getAll = allCategoriesRequest;
-	}
+    getAll() {
+        return allCategoriesRequest.makeApiRequest();
+    }
+
+    static getInstance() {
+        return Categories._instance = Categories._instance || new Categories;
+    }
 }

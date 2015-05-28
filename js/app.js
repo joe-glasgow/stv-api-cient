@@ -1,10 +1,8 @@
 // App.js
 import Categories from './modules/player-categories';
 
-var catRequest = new Categories();
+var catRequest = Categories.getInstance();
 
-catRequest.getAll.makeApiRequest().done(function(response) {
-	console.log(response);
-}).fail(function(xhr) {
-	throw new Error('API responded with status text: ' + xhr.statusText);
-});
+catRequest.getAll()
+    .done((response) => console.log(response))
+    .fail((xhr) => {throw new Error('API responded with status text: ' + xhr.statusText)});
