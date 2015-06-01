@@ -30,8 +30,10 @@ export default class Categories {
     describe('dummy test', () => {
         var catRequest = Categories.getInstance();
         var complete = false;
+
         it('tests value', () => {
 			var callback = jasmine.createSpy();
+
 			catRequest.getAll().done((response) => {
 				xhr = response;
 				callback();
@@ -39,13 +41,15 @@ export default class Categories {
 				xhr = response;
 				callback();
 			});
+
             waitsFor(() => {
 				return callback.callCount > 0;
 			});
 			runs(() => {
-				console.log(xhr);
 				expect(callback).toHaveBeenCalled();
 			});
-            //expect($.getJSON.mostRecentCall.args[0]).toEqual('http://player.api.stv.jmor/v1/categories/');
+
+
+
         });
     });

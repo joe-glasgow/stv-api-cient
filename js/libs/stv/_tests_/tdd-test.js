@@ -15,7 +15,6 @@ describe("it tests that test driven development works", () => {
         expect(myValue).toBe(2);
     });
     it("expects that doubleValue is 4", () => {
-        console.log(doubleValue);
         expect(doubleValue).toBe(4);
     });
 });
