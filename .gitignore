@@ -8,3 +8,4 @@ branches
 HEAD
 config
 description
+config.json
