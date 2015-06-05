@@ -6,7 +6,7 @@ let xhr = {};
 import APIRequest from '../js/libs/stv/stv-base-request';
 
 
-describe("it checks API requests", () => {
+describe("Call API request", () => {
     let request = new APIRequest('player');
     let requestedUrl = '';
     let successFullResponse = require('../__json__/api-sample-success');
@@ -16,7 +16,7 @@ describe("it checks API requests", () => {
     });
 
     // make request and expect url to equal that of environment
-    it("checks that the url called is as expected", () => {
+    it("and check that the url called is as expected", () => {
         spyOn(request, 'makeAPIRequest').andCallThrough();
         spyOn($, 'Deferred').andCallThrough();
         spyOn($, 'ajax').andCallFake(function (e) {
@@ -27,7 +27,7 @@ describe("it checks API requests", () => {
     });
 
     //check we can make api call types
-    it("checks we can make API calls by type", () => {
+    it("and checks we can make API calls by type", () => {
         spyOn(request, 'makeAPIRequest').andCallThrough();
         spyOn($, 'Deferred').andCallThrough();
         spyOn($, 'ajax').andCallFake(function (e) {
@@ -39,7 +39,7 @@ describe("it checks API requests", () => {
     });
 
     // check the request and its methods
-    it("checks that url calls are made with filtering params", () => {
+    it("and checks that url calls are made with filtering params", () => {
         let data = {};
         //stv-api-parameters
         spyOn(request, 'makeAPIRequest').andCallThrough();
