@@ -44,7 +44,6 @@ describe("Call API request", () => {
         //stv-api-parameters
         spyOn(request, 'makeAPIRequest').andCallThrough();
         spyOn($, 'ajax').andCallFake(function (e) {
-            console.log(e.url);
             data = e.data;
         });
         spyOn($, 'Deferred').andCallThrough();
@@ -56,7 +55,34 @@ describe("Call API request", () => {
         expect(data.filter).toContain('createdBy');
     });
     // simulate a done response with sample json and test
+    it("and check that a successful response returns data as expected", () => {
+        let responseObj = '';
+        // create a callback to continue when call complete
+        let callback = jasmine.createSpy();
+        spyOn(request, 'makeAPIRequest').andCallThrough();
+        spyOn($, 'Deferred').andCallThrough();
+        spyOn($, 'ajax').andCallFake((e) => {
+            // a successful response would bring back json
+            responseObj = successFullResponse;
+            callback();
+        });
 
+        request.setType('episodes');
+        request.makeAPIRequest();
+
+        waitsFor(() => {
+            return callback.callCount > 0;
+        });
+
+        runs(() => {
+            // expect a JSON object
+            expect(typeof responseObj).toBe('object');
+            // expect a success response to be true
+            expect(responseObj.success).toEqual(true);
+            // expect results to be returned as an array
+            expect(responseObj.results instanceof Array).toBe(true);
+        });
+    });
 
     // simulate a fail response and test
 
