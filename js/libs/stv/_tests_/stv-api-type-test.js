@@ -6,7 +6,7 @@ import APIRequest from '../js/libs/stv/stv-base-request';
 // jQuery global
 $ = jQuery;
 
-describe("Check that type checking is implicit and", () => {
+describe("Check that type checking is implicit", () => {
     let request = new APIRequest('player');
     let error = '';
     beforeEach(() => {
@@ -14,10 +14,10 @@ describe("Check that type checking is implicit and", () => {
         spyOn(request, 'makeAPIRequest').andCallThrough();
     });
     // simulate numerical when string errors
-    it("finds that numerical when string errors are reported and caught", () => {
+    it("finds that numerical values when expecting a string errors out and is caught", () => {
         // try setting a number when expecting string value
         try {
-            request.setType('episodes').orderBy(42)
+            request.setType('episodes').orderBy()
         } catch (e) {
             error = true;
             expect(error).toEqual(true);
@@ -25,7 +25,7 @@ describe("Check that type checking is implicit and", () => {
 
     });
     // simulate string when numberical error
-    it("finds that string when numberical errors are reported and caught", () => {
+    it("finds that a string when expecting numberical errors caught", () => {
 
         // check that string failes
         try {
@@ -46,7 +46,7 @@ describe("Check that type checking is implicit and", () => {
 
     });
     // simulate boolean when string
-    it("finds that numerical when string errors are reported and caught", () => {
+    it("finds that boolean values when expecting a string error is caught", () => {
 
         // try when true instead of string
         try {
@@ -67,7 +67,7 @@ describe("Check that type checking is implicit and", () => {
 
     });
     // simulate boolean when numberical
-    it("finds that numerical when string errors are reported and caught", () => {
+    it("finds that boolean when expecting a number error is caught", () => {
 
         // check refuses true when expecting number
         try {
