@@ -11,12 +11,11 @@ describe("Check that type checking is implicit and", () => {
     let error = '';
     beforeEach(() => {
         error = false;
+        spyOn(request, 'makeAPIRequest').andCallThrough();
     });
     // simulate numerical when string errors
-    it("will check that numerical when string errors are reported and caught", () => {
-
-        spyOn(request, 'makeAPIRequest').andCallThrough();
-
+    it("finds that numerical when string errors are reported and caught", () => {
+        // try setting a number when expecting string value
         try {
             request.setType('episodes').orderBy(42)
         } catch (e) {
@@ -26,9 +25,8 @@ describe("Check that type checking is implicit and", () => {
 
     });
     // simulate string when numberical error
-    it("will check that string when numberical errors are reported and caught", () => {
+    it("finds that string when numberical errors are reported and caught", () => {
 
-        spyOn(request, 'makeAPIRequest').andCallThrough();
         // check that string failes
         try {
             request.setType('episodes').groupToken('myString')
@@ -48,9 +46,8 @@ describe("Check that type checking is implicit and", () => {
 
     });
     // simulate boolean when string
-    it("will check that numerical when string errors are reported and caught", () => {
+    it("finds that numerical when string errors are reported and caught", () => {
 
-        spyOn(request, 'makeAPIRequest').andCallThrough();
         // try when true instead of string
         try {
             request.setType('episodes').startLetter(true);
@@ -70,9 +67,8 @@ describe("Check that type checking is implicit and", () => {
 
     });
     // simulate boolean when numberical
-    it("will check that numerical when string errors are reported and caught", () => {
+    it("finds that numerical when string errors are reported and caught", () => {
 
-        spyOn(request, 'makeAPIRequest').andCallThrough();
         // check refuses true when expecting number
         try {
             request.setType('episodes').groupToken(true);

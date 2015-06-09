@@ -11,15 +11,15 @@ describe("Construct a new request", () => {
     let stvRequest = new APIRequest('stv');
     let playerRequest = new APIRequest('player');
 
-    it("and check than an empty request fails", () => {
+    it("checks that than an empty request fails", () => {
         expect(noRequest.api).toBe(undefined);
     });
 
-    it("and check that the stv request returns correct api", () => {
+    it("checks that the stv request returns correct api", () => {
         expect(stvRequest.api).toBe('stv');
     });
 
-    it("and check that player request returns correct api", () => {
+    it("checks that player request returns correct api", () => {
         expect(playerRequest.api).toBe('player');
     });
 });
@@ -37,7 +37,7 @@ describe("Call API request", () => {
     });
 
     // make request and expect url to equal that of environment
-    it("and check that the url called is as expected", () => {
+    it("checks that the url called is as expected", () => {
         spyOn(request, 'makeAPIRequest').andCallThrough();
         spyOn($, 'Deferred').andCallThrough();
         spyOn($, 'ajax').andCallFake(function (e) {
@@ -48,7 +48,7 @@ describe("Call API request", () => {
     });
 
     //check we can make api call types
-    it("and checks we can make API calls by type", () => {
+    it("checks we can make API calls by type", () => {
         spyOn(request, 'makeAPIRequest').andCallThrough();
         spyOn($, 'Deferred').andCallThrough();
         spyOn($, 'ajax').andCallFake(function (e) {
@@ -60,7 +60,7 @@ describe("Call API request", () => {
     });
 
     // check the request and its methods
-    it("and checks that url calls are made with filtering params", () => {
+    it("checks that url calls are made with filtering params", () => {
         let data = {};
         //stv-api-parameters
         spyOn(request, 'makeAPIRequest').andCallThrough();
@@ -75,7 +75,7 @@ describe("Call API request", () => {
         expect(data.orderBy).toContain('name,date');
     });
     // simulate a done response with sample json and test
-    it("and check that a successful response returns data as expected", () => {
+    it("checks that a successful response returns data as expected", () => {
         let responseObj = '';
         // create a callback to continue when call complete
         let callback = jasmine.createSpy();
@@ -105,7 +105,7 @@ describe("Call API request", () => {
     });
 
     // simulate a fail response and test
-    it("and check that fails can be handled as expected", () => {
+    it("checks that fails can be handled as expected", () => {
         // expect a "false" success e.g. fail
         expect(failResponse.success).toEqual(false);
         // expect to be given a numbericl reason code

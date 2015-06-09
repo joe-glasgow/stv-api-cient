@@ -10,7 +10,6 @@ export default  {
             return true;
         } else {
             this._errorMessage(value, "Number");
-
         }
     },
     isString (value) {
