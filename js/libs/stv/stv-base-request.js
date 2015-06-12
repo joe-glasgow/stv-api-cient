@@ -27,6 +27,7 @@ let apiUrl = new APIBuilder();
              dfd = $.Deferred();
          // make the request
         $.ajax({
+            type : 'GET',
             url : request,
             // send any request parameters
             data : this.requestParameters,
