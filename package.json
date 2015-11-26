@@ -12,12 +12,12 @@
         "testFileExtensions": ["es6", "js"],
         "globals": {
             "tld": "jmor",
-             "STV" : {
-                 "url" : {
-                     "playerAPIUrl" : "http://player.api.stv.jmor/v1/",
-                     "stvUrl" : "http://api.stv.jmor/"
-                 }
-             }
+            "STV": {
+                "url": {
+                    "playerAPIUrl": "http://player.api.stv.jmor/v1/",
+                    "stvUrl": "http://api.stv.jmor/"
+                }
+            }
         },
         "moduleFileExtensions": ["js", "json", "es6"]
     },

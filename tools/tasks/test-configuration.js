@@ -9,6 +9,41 @@ function writeToConfig (settings, cb) {
     fs.writeFile('config.json', JSON.stringify(settings), cb);
 }
 
+function writeToJSON () {
+    // read the config file
+    return fs.readFile(process.cwd() + '/config.json', function (error, data) {
+        if (error) {
+            console.error(error);
+            return false;
+        } else {
+            // grab the tld
+            var tld = JSON.parse(data)["tld"];
+            // read the package.json
+            fs.readFile(process.cwd() + '/package.json', function (error, data) {
+                if (error) {
+                    console.error(error);
+                    return false;
+                } else {
+                    // get the package data
+                    var settings = JSON.parse(data);
+                    // set the correct tld
+                    settings["jest"]["globals"]["tld"] = tld;
+                    settings["jest"]["globals"]["STV"]["url"]["playerAPIUrl"] = "http://player.api.stv." + tld + "/v1/";
+                    settings["jest"]["globals"]["STV"]["url"]["stvUrl"] = "http://api.stv."+ tld +"/";
+                    // write amended package.json
+                    return fs.writeFile('package.json', JSON.stringify(settings), function () {
+                        // format the package.json
+                        return gulp.src('package.json')
+                               .pipe(beautify({indentSize : 4}))
+                               .pipe(gulp.dest(process.cwd()))
+                               .pipe(shell('npm test'));
+                    });
+                }
+            });
+        }
+    });
+};
+
 // write configuration file
 module.exports = function () {
     // if we have a config file
@@ -28,38 +63,7 @@ module.exports = function () {
                 // set the tld to the object
                 configObj.tld = res.tld;
                 // write to config file
-                writeToConfig(configObj, function () {
-                    // read the config file
-                    return fs.readFile(process.cwd() + '/config.json', function (error, data) {
-                        if (error) {
-                            console.error(error);
-                            return false;
-                        } else {
-                            // grab the tld
-                            var tld = JSON.parse(data)["tld"];
-                            // read the package.json
-                            fs.readFile(process.cwd() + '/package.json', function (error, data) {
-                                if (error) {
-                                    console.error(error);
-                                    return false;
-                                } else {
-                                    // get the package data
-                                    var settings = JSON.parse(data);
-                                    // set the correct tld
-                                    settings["jest"]["globals"]["tld"] = tld;
-                                    // write amended package.json
-                                    return fs.writeFile('package.json', JSON.stringify(settings), function () {
-                                        // format the package.json
-                                        return gulp.src('package.json')
-                                               .pipe(beautify({indentSize : 4}))
-                                               .pipe(gulp.dest(process.cwd()))
-                                               .pipe(shell('npm test'));
-                                    });
-                                }
-                            });
-                        }
-                    });
-                });
+                writeToConfig(configObj, writeToJSON);
             }));
         }
     });
